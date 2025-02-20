@@ -192,7 +192,7 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
                         </tr>
                         <tr>
                             <td style="border: none" class="pt-2 pr-2">
-                                <h6>Selected Voltage is&nbsp;<span id="temp_slider" style="font-weight: bold;color: red"></span>&nbsp;V</h6>
+                                <h6>Selected Voltage is&nbsp;<span id="volt_slider" style="font-weight: bold;color: red"></span>&nbsp;V</h6>
                             </td>
                         </tr>
                     </table>
@@ -213,15 +213,7 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
                             </tr>
                             <tr>
                                 <td style="border: none" class="pt-2 pr-2">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                    <h6>Respected value is&nbsp;<span id="sat_cur" style="font-weight: bold;color: red"></span>&nbsp;&micro;A</h6>
-=======
-                                    <h6>Respective value is&nbsp;<span id="sat_cur" style="font-weight: bold;color: red"></span>&nbsp;&micro;A</h6>
->>>>>>> 86c9944befd7438d64fffc1a76af1db576782d1c
-=======
-                                    <h6>Respective value is&nbsp;<span id="sat_cur" style="font-weight: bold;color: red"></span>&nbsp;&micro;A</h6>
->>>>>>> b6df246e59a1e509091beb42bae39dc3802dd900
+<h6>Respective value is&nbsp;<span id="sat_cur" style="font-weight: bold;color: red"></span>&nbsp;&micro;A</h6>
                                 </td>
                             </tr>
                         </table>
@@ -239,26 +231,19 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
         <tr>
             <th >S.No.</th>
 
-            <th  style="padding: 5px">Temperature(<sup>o</sup>C)
+            <th  style="padding: 5px">Voltage (V)
             </th>
-            <th  style="padding: 5px">Current I<sub>s</sub> (&micro;A)
+            <th  style="padding: 5px">Current I<sub>s</sub>
             </th>
-            <th  style="padding: 5px">Temperature(<sup>o</sup>K)
-            </th>
-            <th  style="padding: 5px">10<sup>3</sup>/T
-            </th>
-            <th  style="padding: 5px">Log<sub>10</sub> I<sub>s</sub>
-            </th>
-
 
         </tr>
 
         </thead>
-        <tbody>
+        <!-- <tbody>
         <tr>
             <th>01</th>
             <td>
-                <input type="number" id="temp1" style="width: 110px">
+                <input type="number" id="volt1" style="width: 110px">
             </td>
             <td>
                 <input type="number" id="cur1" style="width: 110px">
@@ -272,7 +257,7 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
         <tr>
             <th>02</th>
             <td>
-                <input type="number" id="temp2" style="width: 110px">
+                <input type="number" id="volt2" style="width: 110px">
             </td>
             <td>
                 <input type="number" id="cur2" style="width: 110px">
@@ -286,7 +271,7 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
         <tr>
             <th>03</th>
             <td>
-                <input type="number" id="temp3" style="width: 110px">
+                <input type="number" id="volt3" style="width: 110px">
             </td>
             <td>
                 <input type="number" id="cur3" style="width: 110px">
@@ -300,7 +285,7 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
         <tr>
             <th>04</th>
             <td>
-                <input type="number" id="temp4" style="width: 110px">
+                <input type="number" id="volt4" style="width: 110px">
             </td>
             <td>
                 <input type="number" id="cur4" style="width: 110px">
@@ -314,7 +299,7 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
         <tr>
             <th>05</th>
             <td>
-                <input type="number" id="temp5" style="width: 110px">
+                <input type="number" id="volt5" style="width: 110px">
             </td>
             <td>
                 <input type="number" id="cur5" style="width: 110px">
@@ -328,7 +313,7 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
         <tr>
             <th>06</th>
             <td>
-                <input type="number" id="temp6" style="width: 110px">
+                <input type="number" id="volt6" style="width: 110px">
             </td>
             <td>
                 <input type="number" id="cur6" style="width: 110px">
@@ -342,7 +327,7 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
         <tr>
             <th>07</th>
             <td>
-                <input type="number" id="temp7" style="width: 110px">
+                <input type="number" id="volt7" style="width: 110px">
             </td>
             <td>
                 <input type="number" id="cur7" style="width: 110px">
@@ -356,7 +341,7 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
         <tr>
             <th>08</th>
             <td>
-                <input type="number" id="temp8" style="width: 110px">
+                <input type="number" id="volt8" style="width: 110px">
             </td>
             <td>
                 <input type="number" id="cur8" style="width: 110px">
@@ -367,7 +352,7 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
             <td id="lg8"></td>
 
         </tr>
-        </tbody>
+        </tbody> -->
 
     </table>
     <br>
@@ -439,7 +424,7 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
         </table>
     </div>
 <hr>
-    <p style="bottom:0;float:right;font-size:6px">&copy;Aryan Raj Meheriya</p>
+    <p style="bottom:0;float:right;font-size:6px">&copy;Aryan Raj Maurya</p>
 <script>
     function cal_volt() {
         var e1 = document.getElementById("select_volt");
@@ -459,7 +444,7 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
 
     }
     var slider = document.getElementById("myRange");
-    var output = document.getElementById("temp_slider");
+    var output = document.getElementById("volt_slider");
     output.innerHTML = slider.value;
 
     slider.oninput = function() {
@@ -468,7 +453,7 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
 
     function rev_cur() {
         var slider_val = Number(document.getElementById("myRange").value) + 273;
-        //var output = document.getElementById("temp_slider");
+        //var output = document.getElementById("volt_slider");
         var logi = (5.3 - (5.036 * 0.266 * 1000)/slider_val );
         var i_sat = Math.pow(10 , logi);
         document.getElementById('sat_cur').innerHTML = i_sat.toFixed(3);
@@ -478,14 +463,14 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
     function calculate_table() {
 
 
-        var temp1 = document.getElementById('temp1').value;
-        var temp2 = document.getElementById('temp2').value;
-        var temp3 = document.getElementById('temp3').value;
-        var temp4 = document.getElementById('temp4').value;
-        var temp5 = document.getElementById('temp5').value;
-        var temp6 = document.getElementById('temp6').value;
-        var temp7 = document.getElementById('temp7').value;
-        var temp8 = document.getElementById('temp8').value;
+        var volt1 = document.getElementById('volt1').value;
+        var volt2 = document.getElementById('volt2').value;
+        var volt3 = document.getElementById('volt3').value;
+        var volt4 = document.getElementById('volt4').value;
+        var volt5 = document.getElementById('volt5').value;
+        var volt6 = document.getElementById('volt6').value;
+        var volt7 = document.getElementById('volt7').value;
+        var volt8 = document.getElementById('volt8').value;
 
         var cur1 = document.getElementById('cur1').value;
         var cur2 = document.getElementById('cur2').value;
@@ -496,8 +481,8 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
         var cur7 = document.getElementById('cur7').value;
         var cur8 = document.getElementById('cur8').value;
 
-        if(temp1 =='' || temp2=='' || temp3=='' || temp4=='' || temp5=='' || temp6==''
-            || temp7=='' || temp8=='' || cur1=='' ||cur2==''
+        if(volt1 =='' || volt2=='' || volt3=='' || volt4=='' || volt5=='' || volt6==''
+            || volt7=='' || volt8=='' || cur1=='' ||cur2==''
         || cur3=='' || cur4=='' || cur5=='' || cur6=='' || cur7=='' || cur8=='' ){
 
             alert('Please insert data in all required fields... ');
@@ -509,24 +494,24 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
             document.getElementById('graph').style.cursor="pointer";
             document.getElementById('graph').classList.remove("disabled");
 
-            document.getElementById('t1').innerHTML=parseInt(temp1) + 273;
-            document.getElementById('t2').innerHTML=parseInt(temp2) + 273;
-            document.getElementById('t3').innerHTML=parseInt(temp3) + 273;
-            document.getElementById('t4').innerHTML=parseInt(temp4) + 273;
-            document.getElementById('t5').innerHTML=parseInt(temp5) + 273;
-            document.getElementById('t6').innerHTML=parseInt(temp6) + 273;
-            document.getElementById('t7').innerHTML=parseInt(temp7) + 273;
-            document.getElementById('t8').innerHTML=parseInt(temp8) + 273;
+            document.getElementById('t1').innerHTML=parseInt(volt1) + 273;
+            document.getElementById('t2').innerHTML=parseInt(volt2) + 273;
+            document.getElementById('t3').innerHTML=parseInt(volt3) + 273;
+            document.getElementById('t4').innerHTML=parseInt(volt4) + 273;
+            document.getElementById('t5').innerHTML=parseInt(volt5) + 273;
+            document.getElementById('t6').innerHTML=parseInt(volt6) + 273;
+            document.getElementById('t7').innerHTML=parseInt(volt7) + 273;
+            document.getElementById('t8').innerHTML=parseInt(volt8) + 273;
 
 
-            var x1 =Number(1000 / (parseInt(temp1) + 273)).toFixed(2);
-            var x2 =Number(1000 / (parseInt(temp2) + 273)).toFixed(2);
-            var x3 =Number(1000 / (parseInt(temp3) + 273)).toFixed(2);
-            var x4 =Number(1000 / (parseInt(temp4) + 273)).toFixed(2);
-            var x5 =Number(1000 / (parseInt(temp5) + 273)).toFixed(2);
-            var x6 =Number(1000 / (parseInt(temp6) + 273)).toFixed(2);
-            var x7 =Number(1000 / (parseInt(temp7) + 273)).toFixed(2);
-            var x8 =Number(1000 / (parseInt(temp8) + 273)).toFixed(2);
+            var x1 =Number(1000 / (parseInt(volt1) + 273)).toFixed(2);
+            var x2 =Number(1000 / (parseInt(volt2) + 273)).toFixed(2);
+            var x3 =Number(1000 / (parseInt(volt3) + 273)).toFixed(2);
+            var x4 =Number(1000 / (parseInt(volt4) + 273)).toFixed(2);
+            var x5 =Number(1000 / (parseInt(volt5) + 273)).toFixed(2);
+            var x6 =Number(1000 / (parseInt(volt6) + 273)).toFixed(2);
+            var x7 =Number(1000 / (parseInt(volt7) + 273)).toFixed(2);
+            var x8 =Number(1000 / (parseInt(volt8) + 273)).toFixed(2);
 
             document.getElementById('i1').innerHTML=x1;
             document.getElementById('i2').innerHTML=x2;
@@ -566,14 +551,14 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
         document.getElementById('slope_button').style.cursor="pointer";
         document.getElementById('slope_button').classList.remove("disabled");
 
-        var temp1 = document.getElementById('temp1').value;
-        var temp2 = document.getElementById('temp2').value;
-        var temp3 = document.getElementById('temp3').value;
-        var temp4 = document.getElementById('temp4').value;
-        var temp5 = document.getElementById('temp5').value;
-        var temp6 = document.getElementById('temp6').value;
-        var temp7 = document.getElementById('temp7').value;
-        var temp8 = document.getElementById('temp8').value;
+        var volt1 = document.getElementById('volt1').value;
+        var volt2 = document.getElementById('volt2').value;
+        var volt3 = document.getElementById('volt3').value;
+        var volt4 = document.getElementById('volt4').value;
+        var volt5 = document.getElementById('volt5').value;
+        var volt6 = document.getElementById('volt6').value;
+        var volt7 = document.getElementById('volt7').value;
+        var volt8 = document.getElementById('volt8').value;
 
         var cur1 = document.getElementById('cur1').value;
         var cur2 = document.getElementById('cur2').value;
@@ -585,14 +570,14 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
         var cur8 = document.getElementById('cur8').value;
 
         var pnt = [];
-        pnt.push({x: Number(1000 / (parseInt(temp1) + 273)), y: Math.log10(cur1)});
-        pnt.push({x: Number(1000 / (parseInt(temp2) + 273)), y: Math.log10(cur2)});
-        pnt.push({x: Number(1000 / (parseInt(temp3) + 273)), y: Math.log10(cur3)});
-        pnt.push({x: Number(1000 / (parseInt(temp4) + 273)), y: Math.log10(cur4)});
-        pnt.push({x: Number(1000 / (parseInt(temp5) + 273)), y: Math.log10(cur5)});
-        pnt.push({x: Number(1000 / (parseInt(temp6) + 273)), y: Math.log10(cur6)});
-        pnt.push({x: Number(1000 / (parseInt(temp7) + 273)), y: Math.log10(cur7)});
-        pnt.push({x: Number(1000 / (parseInt(temp8) + 273)), y: Math.log10(cur8)});
+        pnt.push({x: Number(1000 / (parseInt(volt1) + 273)), y: Math.log10(cur1)});
+        pnt.push({x: Number(1000 / (parseInt(volt2) + 273)), y: Math.log10(cur2)});
+        pnt.push({x: Number(1000 / (parseInt(volt3) + 273)), y: Math.log10(cur3)});
+        pnt.push({x: Number(1000 / (parseInt(volt4) + 273)), y: Math.log10(cur4)});
+        pnt.push({x: Number(1000 / (parseInt(volt5) + 273)), y: Math.log10(cur5)});
+        pnt.push({x: Number(1000 / (parseInt(volt6) + 273)), y: Math.log10(cur6)});
+        pnt.push({x: Number(1000 / (parseInt(volt7) + 273)), y: Math.log10(cur7)});
+        pnt.push({x: Number(1000 / (parseInt(volt8) + 273)), y: Math.log10(cur8)});
         drawgraph("l1", pnt, "1000/T", "Log Is");
 
     }
