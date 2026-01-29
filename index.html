@@ -125,38 +125,6 @@
             text-align: center;
         }
 
-        /* Floating control panel styles */
-        .control-panel {
-            position: absolute;
-            right: 24px;
-            top: 120px;
-            width: 260px;
-            background-color: lightpink;
-            border-radius: 10px;
-            padding: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-            z-index: 20;
-            font-size: 14px;
-        }
-
-        .control-panel .panel-section {
-            background: rgba(255,255,255,0.6);
-            border-radius: 8px;
-            padding: 8px;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .control-panel select,
-        .control-panel input[type="range"] {
-            width: calc(100% - 10px);
-        }
-
-        .control-panel .small-btn {
-            padding: 6px 10px;
-            font-size: 14px;
-        }
-
         @media (max-width: 992px) {
             .obs-container {
                 flex-direction: column;
@@ -164,12 +132,6 @@
 
             .graph-box {
                 width: 100%;
-            }
-
-            .control-panel {
-                position: static;
-                width: 100%;
-                margin: 10px 0;
             }
         }
 
@@ -181,7 +143,7 @@
 style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</span> Y: <span id="mouseY"
 style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</span>
 </div>
-<div class="container-fluid mt-4" style="height: 105vh; position: relative;">
+<div class="container-fluid mt-4" style="height: 105vh;">
     <h2 class="text-center  p-2 text-white" style="border-radius: 10px;background-color:#634380;color:white;margin: -20px 5px 0 5px ;font-weight: bold">Plancks constant SIMULATION</h2>
     <div class="row ml-1 mt-2 mb-5"  style="justify-content: left;" >
 
@@ -212,7 +174,7 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
             <div class="row mb-1">
 
                 <button id="point" style="width: 110px;cursor: allowed" disabled  vlab-action="DRAW_POINT" class="btn btn-primary mr-1"> Point</button>
-                <button id="wires" style="width: 110px;cursor: allowed" disabled  vlab-action="MAKE_CONNECTION" class="btn btn-primary" onclick="connect_wire()> Connect</button>
+                <button id="wires" style="width: 110px;cursor: allowed" disabled  vlab-action="MAKE_CONNECTION" class="btn btn-primary" onclick="connect_wire()"> Connect</button>
             </div>
 
             <div class="row mb-1">
@@ -249,56 +211,80 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
             </canvas>
         </div>
 
-    </div>
-
-    <!-- Floating control panel placed to the right of the canvas -->
-    <div class="control-panel" id="floating_controls">
-        <div class="panel-section">
-            <table style="border: none;text-align: center;width:100%">
-                <tr>
-                    <td>
-                        <select id="select_volt" style="border-radius: 5px;outline: none;">
-                            <option>Select LED Color </option>
-                            <option>01 RED</option>
-                            <option>02 BLUE</option>
-                            <option>03 GREEN </option>
-                            <option>04 YELLOW</option>
-                        </select>
-                    </td>
-                    <td style="padding-left:8px">
-                        <button class="btn btn-primary small-btn disabled" disabled id="calc_volt" onclick="cal_volt()">Click</button>
-                    </td>
-                </tr>
-                <tr id="vlted" style="display: none">
-                    <td style="padding-top:8px">
-                        <h6 style="margin:0">Selected Color of LED is </h6>
-                    </td>
-                    <td style="padding-top:8px">
-                        <h6 style="margin:0"><span id="voltage" style="color: red;font-weight: bold"></span></h6>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="panel-section">
-            <h6 style="margin:6px 0">Slide to choose Voltage</h6>
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 8px">
-                <span style="font-weight:bold">0</span>
-                <input type="range" min="0" max="5" step="0.1" value="0" class="slider" id="myRange" >
-                <span style="font-weight:bold">5</span>
+        <div class="col-xs-2 ml-2" >
+            <div class="row " style="height: max-content;">
+                <div style="background-color: lightpink;margin: 0 10px 0 15px;border-radius: 10px">
+                    <table style="border: none;text-align: center;width: 200px;margin: 0 0 20px 0" >
+                        <tr >
+                            <td class="p-2" style="border: none">
+                                <select id="select_volt" class="p-1" style="border-radius: 5px;outline: none;width: 150px">
+                                    <option>Select LED Color </option>
+                                    <option>01 RED</option>
+                                    <option>02 BLUE</option>
+                                    <option>03 GREEN </option>
+                                    <option>04 YELLOW</option>
+                                </select>
+                            </td>
+                            <td class="p-2" style="border: none">
+                                <button class="btn btn-primary disabled" disabled id="calc_volt" onclick="cal_volt()">Click</button>
+                            </td>
+                        </tr>
+                        <tr id="vlted" style="display: none">
+                            <td class="" style="border: none" >
+                                <h6>Selected Color of LED is </h6>
+                            </td>
+                            <td class="" style="border: none" >
+                                <h6><span id="voltage" style="color: red;font-weight: bold"></span></h6>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <div style="padding-top:6px"><h6 style="margin:0">Selected Voltage is&nbsp;<span id="volt_slider" style="font-weight: bold;color: red"></span>&nbsp;V</h6></div>
-        </div>
-
-        <div class="panel-section">
-            <h6 style="margin:6px 0">Get Current</h6>
-            <div style="padding:8px">
-                <button type="button" class="btn btn-primary small-btn disabled" disabled id="current" onclick="rev_cur()">Find Here</button>
+            <div class="row mt-2" style="height: max-content;">
+                <div style="background-color: lightpink;margin: 0 10px 0 15px;border-radius: 10px">
+                    <table style="border: none;text-align: center;width: 260px;margin: 0 0 20px 20px">
+                        <tr>
+                            <td style="border: none" class="pt-2 pr-2 pb-2">
+                                <h6>Slide to choose Voltage</h6>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: none">
+                                <span style="font-weight: bold">0</span>
+                                <input type="range" min="0" max="5" step="0.1" value="0" class="slider" id="myRange" >
+                                <span style="font-weight: bold">5</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: none" class="pt-2 pr-2">
+                                <h6>Selected Voltage is&nbsp;<span id="volt_slider" style="font-weight: bold;color: red"></span>&nbsp;V</h6>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <div style="padding-top:6px"><h6 style="margin:0">Respective value is&nbsp;<span id="sat_cur" style="font-weight: bold;color: red"></span>&nbsp;mA</h6></div>
-        </div>
+                <div class="row mt-2" style="height: max-content;">
+                    <div style="background-color: lightpink;margin: 0 10px 0 15px;border-radius: 10px">
+                        <table style="border: none;text-align: center;width: 260px;margin: 0 0 20px 20px">
+                            <tr>
+                                <td style="border: none" class="pt-2 pr-2 pb-2">
+                                    <h6>Get Current </h6>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none">
+                                    <button type="button" class="btn btn-primary disabled" disabled id="current" onclick="rev_cur()">Find Here</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none" class="pt-2 pr-2">
+<h6>Respective value is&nbsp;<span id="sat_cur" style="font-weight: bold;color: red"></span>&nbsp;mA</h6>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
     </div>
-
 </div>
 
 <div style="margin: 0 5px 0 5px;border-radius: 20px">
@@ -472,8 +458,7 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
         }
         else {
             document.getElementById('voltage').innerHTML=user1;
-            var vltedEl = document.getElementById('vlted');
-            if (vltedEl) vltedEl.style.display = "";
+            vlted.style.display="";
             document.getElementById('current').disabled=false;
             document.getElementById('current').style.cursor="pointer";
             document.getElementById('current').classList.remove("disabled");
@@ -483,11 +468,10 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
     }
     var slider = document.getElementById("myRange");
     var output = document.getElementById("volt_slider");
-    if (slider && output) {
-        output.innerHTML = slider.value;
-        slider.oninput = function() {
-            output.innerHTML = this.value;
-        };
+    output.innerHTML = slider.value;
+
+    slider.oninput = function() {
+        output.innerHTML = this.value;
     }
 
     function rev_cur() {
