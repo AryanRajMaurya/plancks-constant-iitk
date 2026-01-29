@@ -1,80 +1,76 @@
- function main() {
-     btn_main.style.display = 'none';
-     btn_main2.style.display = '';
-     document.getElementById('calc_volt').disabled=false;
-     document.getElementById('calc_volt').style.cursor="pointer";
-     console.log("Main 1 display None")
-     console.log("All Buttons Enabled")
-    //  document.getElementById('container').disabled=false;
-     //  document.getElementById('calc_volt').classList.remove("disabled");
-    //  cl2();
-     cont();
-    }
-    function main2() {
-        btn_main2.style.display = 'none';
-        btn_main.style.display = '';
-        console.log("Main 2 display None")
- }
+let currentInstructionIndex = 0;
+let instructionInterval;
+
+function main() {
+    btn_main.style.display = 'none';
+    btn_main2.style.display = "";
+    document.getElementById("calc_volt").disabled = false;
+    document.getElementById("calc_volt").style.cursor = "pointer";
+    console.log("Main 1 display None");
+    console.log("All Buttons Enabled");
+    cont();
+    startInstructionPanel(); // Start the instruction panel
+    console.log("main() - startInstructionPanel called");
+}
+
+function main2() {
+    btn_main2.style.display = 'none';
+    btn_main.style.display = "";
+    console.log("Main 2 display None");
+    resetInstructionPanel(); // Reset the instruction panel
+    console.log("main2() - resetInstructionPanel called");
+}
 
 function cont() {
-    //alert('rtht');
-    console.log("cont function started")
-    // document.getElementById('pndiode').disabled=false;
-    // document.getElementById('pndiode').style.cursor="pointer";
-    document.getElementById('led').disabled=false;
-    document.getElementById('led').style.cursor="pointer";
-    document.getElementById('battery').disabled=false;
-    document.getElementById('battery').style.cursor="pointer";
-    document.getElementById('ammeter').disabled=false;
-    document.getElementById('ammeter').style.cursor="pointer";
-    document.getElementById('voltmeter').disabled=false;
-    document.getElementById('voltmeter').style.cursor="pointer";
-    document.getElementById('point').disabled=false;
-    document.getElementById('point').style.cursor="pointer";
-    document.getElementById('wires').disabled=false;
-    document.getElementById('wires').style.cursor="pointer";
-    document.getElementById('undo').disabled=false;
-    document.getElementById('undo').style.cursor="pointer";
-    document.getElementById('redo').disabled=false;
-    document.getElementById('redo').style.cursor="pointer";
-    document.getElementById('reset').disabled=false;
-    document.getElementById('reset').style.cursor="pointer";
-    console.log("cont function Ended")
+    console.log("cont function started");
+    document.getElementById('led').disabled = false;
+    document.getElementById('led').style.cursor = "pointer";
+    document.getElementById('battery').disabled = false;
+    document.getElementById('battery').style.cursor = "pointer";
+    document.getElementById('ammeter').disabled = false;
+    document.getElementById('ammeter').style.cursor = "pointer";
+    document.getElementById('voltmeter').disabled = false;
+    document.getElementById('voltmeter').style.cursor = "pointer";
+    document.getElementById('point').disabled = false;
+    document.getElementById('point').style.cursor = "pointer";
+    document.getElementById('wires').disabled = false;
+    document.getElementById('wires').style.cursor = "pointer";
+    document.getElementById('undo').disabled = false;
+    document.getElementById('undo').style.cursor = "pointer";
+    document.getElementById('redo').disabled = false;
+    document.getElementById('redo').style.cursor = "pointer";
+    document.getElementById('reset').disabled = false;
+    document.getElementById('reset').style.cursor = "pointer";
+    console.log("cont function Ended");
     document.body.focus();
-
 }
 
 function connect_wire() {
-    document.getElementById('thermometer').disabled=false;
-    document.getElementById('thermometer').style.cursor="pointer";
+    document.getElementById('thermometer').disabled = false;
+    document.getElementById('thermometer').style.cursor = "pointer";
 }
 
- function cl2() {
-    //  alert('You choose the correct answer ! Please proceed Further...');
-    
-    //  document.getElementById('container').disabled=false;
-     document.getElementById('container').style.cursor="pointer";
-     document.getElementById('container').classList.remove("disabled");
- }
+function cl2() {
+    document.getElementById('container').style.cursor = "pointer";
+    document.getElementById('container').classList.remove("disabled");
+}
 
+var preCon = null;
 
- var preCon = null;
 //update the x and y coordinate
-
-
 var Terminal = function () {
     this.obj = document.getElementById("terminal");
-    this.obj.innerHTML = ">>";
+    this.obj.innerHTML = ">> ";
     this.update = function (str) {
         this.value = this.obj.innerHTML;
-        this.value += str + "<br>>>";
+        this.value += str + "<br>>> ";
         this.obj.innerHTML = this.value;
         this.obj.scrollTo(0, this.obj.scrollHeight);
-    }
+    };
     this.reset = function () {
         this.obj.innerHTML = "";
-    }
-}
+    };
+};
 
 var getMousePos = function (canvas, e) {
     var boundingClientRect = canvas.getBoundingClientRect();
@@ -87,12 +83,12 @@ var getMousePos = function (canvas, e) {
     };
 };
 
- var update = function (x, y) {
-     var tempX = document.getElementById("mouseX");
-     var tempY = document.getElementById("mouseY");
-     tempX.innerHTML = x;
-     tempY.innerHTML = y;
- };
+var update = function (x, y) {
+    var tempX = document.getElementById("mouseX");
+    var tempY = document.getElementById("mouseY");
+    tempX.innerHTML = x;
+    tempY.innerHTML = y;
+};
 
 var pointType = {
     PASSIVE: 0x00,
@@ -151,7 +147,7 @@ var point = function (canvasId, imageId, x, y, r, type, name) {
         }
     };
     this.isInside = function (x, y) {
-        var d = Math.pow(x - this.point.x, 2) + Math.pow(y - this.point.y, 2)
+        var d = Math.pow(x - this.point.x, 2) + Math.pow(y - this.point.y, 2);
         d = Math.sqrt(d);
         if (d <= parseFloat(this.point.r)) {
             return true;
@@ -164,7 +160,7 @@ var point = function (canvasId, imageId, x, y, r, type, name) {
         } else {
 
         }
-    }
+    };
 };
 
 var wire = function (a, b, tilt) {
@@ -186,20 +182,9 @@ var wire = function (a, b, tilt) {
     this.tilt = tilt;
     this.color = null;
     this.draw = function () {
-        // var flag = false;
-        // for (var i in conMap[p.a.name]) {
-        //     flag = flag || (p.b.name == conMap[p.a.name][i]);
-        // }
-        // if (flag)
-        //     p.color = wireColor[p.a.value];
-        // else {
-        //     p.color = "red";
-        //     showMsg("wrong connection");
-        // }
         this.color = "blue";
         canvas.context.beginPath();
         canvas.context.strokeStyle = this.color;
-        //canvas.context.fill("grey");
         canvas.context.lineWidth = 3;
         canvas.context.moveTo(this.a.point.x, this.a.point.y);
         if (this.tilt) {
@@ -222,7 +207,7 @@ var wire = function (a, b, tilt) {
         canvas.context.strokeStyle = this.color;
         canvas.context.stroke();
         canvas.context.closePath();
-    }
+    };
 };
 
 var twoWayKey = function (x, y) {
@@ -236,20 +221,13 @@ var twoWayKey = function (x, y) {
     this.output = this.outputA;
     this.wire = null;
     this.draw = function () {
-
-
-        //this.wire = new wire(this.input, this.output, false);
-
-        //container
         var img = document.getElementById("scream");
-        canvas.context.drawImage(img, 140, 250,500,280);
-
+        canvas.context.drawImage(img, 140, 250, 500, 280);
     };
 
     this.isInside = function (x, y) {
         return true;
     };
-
 };
 
 var TapKey = function (x, y) {
@@ -263,167 +241,137 @@ var TapKey = function (x, y) {
     this.output = this.outputB;
     this.wire = null;
     this.draw = function () {
-
-
         this.wire = new wire(this.input, this.output, false);
-        //this.wire.draw();
-
-        //this.input.draw();
-        //this.outputA.draw();
-        //this.outputB.draw();
-
-
-        // canvas.context.beginPath();
-        // canvas.context.rect(this.x, this.y, this.width, this.height);
-        // canvas.context.stroke();
-        // canvas.context.closePath();
         var img2 = document.getElementById("therma");
-        canvas.context.drawImage(img2, 578-60, 85,100,100);
+        canvas.context.drawImage(img2, 578 - 60, 85, 100, 100);
 
         var img_thr = document.getElementById("img_therma");
-        canvas.context.drawImage(img_thr, 546, 163,20,270);
-
-        //canvas.context.fillStyle = "#59d22d";
-        //canvas.context.fillRect(548, 166, 15, 260);
-        //canvas.context.stroke();
-
-        // canvas.context.beginPath();
-        // canvas.context.lineWidth = "4";
-        // canvas.context.strokeStyle = "black";
-        // canvas.context.moveTo(608 , 267);
-        // canvas.context.lineTo(623 , 265);
-        // canvas.context.closePath();
-
+        canvas.context.drawImage(img_thr, 546, 163, 20, 270);
 
         canvas.context.beginPath();
-
-        canvas.context.moveTo(608-60 , 269+44);
-        canvas.context.lineTo(623-60 , 265+44);
-        canvas.context.moveTo(608-60 , 269+44+70);
-        canvas.context.lineTo(623-60 , 265+44+70);
+        canvas.context.moveTo(608 - 60, 269 + 44);
+        canvas.context.lineTo(623 - 60, 265 + 44);
+        canvas.context.moveTo(608 - 60, 269 + 44 + 70);
+        canvas.context.lineTo(623 - 60, 265 + 44 + 70);
         canvas.context.strokeStyle = "black";
         canvas.context.font = "18px Arial";
-        canvas.context.fillText("Thermometer", 580,220);
+        canvas.context.fillText("Thermometer", 580, 220);
 
-        canvas.context.moveTo(610-60 , 170);
-        canvas.context.lineTo(620-60 , 170);
-        canvas.context.moveTo(610-60 , 175);
-        canvas.context.lineTo(615-60 , 175);
-        canvas.context.moveTo(610-60 , 180);
-        canvas.context.lineTo(615-60 , 180);
-        canvas.context.moveTo(610-60 , 185);
-        canvas.context.lineTo(615-60 , 185);
-        canvas.context.moveTo(610-60 , 190);
-        canvas.context.lineTo(615-60 , 190);
-        canvas.context.moveTo(610-60 , 195);
-        canvas.context.lineTo(620-60 , 195);
+        canvas.context.moveTo(610 - 60, 170);
+        canvas.context.lineTo(620 - 60, 170);
+        canvas.context.moveTo(610 - 60, 175);
+        canvas.context.lineTo(615 - 60, 175);
+        canvas.context.moveTo(610 - 60, 180);
+        canvas.context.lineTo(615 - 60, 180);
+        canvas.context.moveTo(610 - 60, 185);
+        canvas.context.lineTo(615 - 60, 185);
+        canvas.context.moveTo(610 - 60, 190);
+        canvas.context.lineTo(615 - 60, 190);
+        canvas.context.moveTo(610 - 60, 195);
+        canvas.context.lineTo(620 - 60, 195);
 
-        canvas.context.moveTo(610-60 , 200);
-        canvas.context.lineTo(615-60 , 200);
-        canvas.context.moveTo(610-60 , 205);
-        canvas.context.lineTo(615-60 , 205);
-        canvas.context.moveTo(610-60 , 210);
-        canvas.context.lineTo(615-60 , 210);
-        canvas.context.moveTo(610-60 , 215);
-        canvas.context.lineTo(615-60 , 215);
-        canvas.context.moveTo(610-60 , 220);
-        canvas.context.lineTo(620-60 , 220);
+        canvas.context.moveTo(610 - 60, 200);
+        canvas.context.lineTo(615 - 60, 200);
+        canvas.context.moveTo(610 - 60, 205);
+        canvas.context.lineTo(615 - 60, 205);
+        canvas.context.moveTo(610 - 60, 210);
+        canvas.context.lineTo(615 - 60, 210);
+        canvas.context.moveTo(610 - 60, 215);
+        canvas.context.lineTo(615 - 60, 215);
+        canvas.context.moveTo(610 - 60, 220);
+        canvas.context.lineTo(620 - 60, 220);
 
-        canvas.context.moveTo(610-60 , 225);
-        canvas.context.lineTo(615-60 , 225);
-        canvas.context.moveTo(610-60 , 230);
-        canvas.context.lineTo(615-60 , 230);
-        canvas.context.moveTo(610-60 , 235);
-        canvas.context.lineTo(615-60 , 235);
-        canvas.context.moveTo(610-60 , 240);
-        canvas.context.lineTo(615-60 , 240);
-        canvas.context.moveTo(610-60 , 245);
-        canvas.context.lineTo(620-60 , 245);
+        canvas.context.moveTo(610 - 60, 225);
+        canvas.context.lineTo(615 - 60, 225);
+        canvas.context.moveTo(610 - 60, 230);
+        canvas.context.lineTo(615 - 60, 230);
+        canvas.context.moveTo(610 - 60, 235);
+        canvas.context.lineTo(615 - 60, 235);
+        canvas.context.moveTo(610 - 60, 240);
+        canvas.context.lineTo(615 - 60, 240);
+        canvas.context.moveTo(610 - 60, 245);
+        canvas.context.lineTo(620 - 60, 245);
 
-        canvas.context.moveTo(610-60 , 250);
-        canvas.context.lineTo(615-60 , 250);
-        canvas.context.moveTo(610-60 , 255);
-        canvas.context.lineTo(615-60 , 255);
-        canvas.context.moveTo(610-60 , 260);
-        canvas.context.lineTo(615-60 , 260);
-        canvas.context.moveTo(610-60 , 265);
-        canvas.context.lineTo(615-60 , 265);
-        canvas.context.moveTo(610-60 , 270);
-        canvas.context.lineTo(620-60 , 270);
+        canvas.context.moveTo(610 - 60, 250);
+        canvas.context.lineTo(615 - 60, 250);
+        canvas.context.moveTo(610 - 60, 255);
+        canvas.context.lineTo(615 - 60, 255);
+        canvas.context.moveTo(610 - 60, 260);
+        canvas.context.lineTo(615 - 60, 260);
+        canvas.context.moveTo(610 - 60, 265);
+        canvas.context.lineTo(615 - 60, 265);
+        canvas.context.moveTo(610 - 60, 270);
+        canvas.context.lineTo(620 - 60, 270);
 
-        canvas.context.moveTo(610-60 , 250);
-        canvas.context.lineTo(615-60 , 250);
-        canvas.context.moveTo(610-60 , 255);
-        canvas.context.lineTo(615-60 , 255);
-        canvas.context.moveTo(610-60 , 260);
-        canvas.context.lineTo(615-60 , 260);
-        canvas.context.moveTo(610-60 , 265);
-        canvas.context.lineTo(615-60 , 265);
-        canvas.context.moveTo(610-60 , 270);
-        canvas.context.lineTo(620-60 , 270);
+        canvas.context.moveTo(610 - 60, 250);
+        canvas.context.lineTo(615 - 60, 250);
+        canvas.context.moveTo(610 - 60, 255);
+        canvas.context.lineTo(615 - 60, 255);
+        canvas.context.moveTo(610 - 60, 260);
+        canvas.context.lineTo(615 - 60, 260);
+        canvas.context.moveTo(610 - 60, 265);
+        canvas.context.lineTo(615 - 60, 265);
+        canvas.context.moveTo(610 - 60, 270);
+        canvas.context.lineTo(620 - 60, 270);
 
-        canvas.context.moveTo(610-60 , 275);
-        canvas.context.lineTo(615-60 , 275);
-        canvas.context.moveTo(610-60 , 280);
-        canvas.context.lineTo(615-60 , 280);
-        canvas.context.moveTo(610-60 , 285);
-        canvas.context.lineTo(615-60 , 285);
-        canvas.context.moveTo(610-60 , 290);
-        canvas.context.lineTo(615-60 , 290);
-        canvas.context.moveTo(610-60 , 295);
-        canvas.context.lineTo(620-60 , 295);
+        canvas.context.moveTo(610 - 60, 275);
+        canvas.context.lineTo(615 - 60, 275);
+        canvas.context.moveTo(610 - 60, 280);
+        canvas.context.lineTo(615 - 60, 280);
+        canvas.context.moveTo(610 - 60, 285);
+        canvas.context.lineTo(615 - 60, 285);
+        canvas.context.moveTo(610 - 60, 290);
+        canvas.context.lineTo(615 - 60, 290);
+        canvas.context.moveTo(610 - 60, 295);
+        canvas.context.lineTo(620 - 60, 295);
 
-        canvas.context.moveTo(610-60 , 300);
-        canvas.context.lineTo(615-60 , 300);
-        canvas.context.moveTo(610-60 , 305);
-        canvas.context.lineTo(615-60 , 305);
-        canvas.context.moveTo(610-60 , 310);
-        canvas.context.lineTo(615 -60, 310);
-        canvas.context.moveTo(610-60 , 315);
-        canvas.context.lineTo(615-60 , 315);
-        canvas.context.moveTo(610-60 , 320);
-        canvas.context.lineTo(620-60 , 320);
+        canvas.context.moveTo(610 - 60, 300);
+        canvas.context.lineTo(615 - 60, 300);
+        canvas.context.moveTo(610 - 60, 305);
+        canvas.context.lineTo(615 - 60, 305);
+        canvas.context.moveTo(610 - 60, 310);
+        canvas.context.lineTo(615 - 60, 310);
+        canvas.context.moveTo(610 - 60, 315);
+        canvas.context.lineTo(615 - 60, 315);
+        canvas.context.moveTo(610 - 60, 320);
+        canvas.context.lineTo(620 - 60, 320);
 
-        canvas.context.moveTo(610-60 , 325);
-        canvas.context.lineTo(615-60 , 325);
-        canvas.context.moveTo(610-60 , 330);
-        canvas.context.lineTo(615-60 , 330);
-        canvas.context.moveTo(610-60 , 335);
-        canvas.context.lineTo(615-60 , 335);
-        canvas.context.moveTo(610-60 , 340);
-        canvas.context.lineTo(615-60 , 340);
-        canvas.context.moveTo(610-60 , 345);
-        canvas.context.lineTo(620-60 , 345);
+        canvas.context.moveTo(610 - 60, 325);
+        canvas.context.lineTo(615 - 60, 325);
+        canvas.context.moveTo(610 - 60, 330);
+        canvas.context.lineTo(615 - 60, 330);
+        canvas.context.moveTo(610 - 60, 335);
+        canvas.context.lineTo(615 - 60, 335);
+        canvas.context.moveTo(610 - 60, 340);
+        canvas.context.lineTo(615 - 60, 340);
+        canvas.context.moveTo(610 - 60, 345);
+        canvas.context.lineTo(620 - 60, 345);
 
-        canvas.context.moveTo(610-60 , 350);
-        canvas.context.lineTo(615-60 , 350);
-        canvas.context.moveTo(610-60 , 355);
-        canvas.context.lineTo(615-60 , 355);
-        canvas.context.moveTo(610-60 , 360);
-        canvas.context.lineTo(615-60 , 360);
-        canvas.context.moveTo(610-60 , 365);
-        canvas.context.lineTo(615-60 , 365);
-        canvas.context.moveTo(610-60 , 370);
-        canvas.context.lineTo(620-60 , 370);
+        canvas.context.moveTo(610 - 60, 350);
+        canvas.context.lineTo(615 - 60, 350);
+        canvas.context.moveTo(610 - 60, 355);
+        canvas.context.lineTo(615 - 60, 355);
+        canvas.context.moveTo(610 - 60, 360);
+        canvas.context.lineTo(615 - 60, 360);
+        canvas.context.moveTo(610 - 60, 365);
+        canvas.context.lineTo(615 - 60, 365);
+        canvas.context.moveTo(610 - 60, 370);
+        canvas.context.lineTo(620 - 60, 370);
 
-        canvas.context.moveTo(610-60 , 375);
-        canvas.context.lineTo(615-60 , 375);
-        canvas.context.moveTo(610-60 , 380);
-        canvas.context.lineTo(615-60 , 380);
-        canvas.context.moveTo(610-60 , 385);
-        canvas.context.lineTo(615-60 , 385);
-        canvas.context.moveTo(610-60 , 390);
-        canvas.context.lineTo(615-60 , 390);
-        canvas.context.moveTo(610-60 , 395);
-        canvas.context.lineTo(620-60 , 395);
-
-
+        canvas.context.moveTo(610 - 60, 375);
+        canvas.context.lineTo(615 - 60, 375);
+        canvas.context.moveTo(610 - 60, 380);
+        canvas.context.lineTo(615 - 60, 380);
+        canvas.context.moveTo(610 - 60, 385);
+        canvas.context.lineTo(615 - 60, 385);
+        canvas.context.moveTo(610 - 60, 390);
+        canvas.context.lineTo(615 - 60, 390);
+        canvas.context.moveTo(610 - 60, 395);
+        canvas.context.lineTo(620 - 60, 395);
 
         canvas.context.strokeStyle = "grey";
         canvas.context.lineWidth = 2;
         canvas.context.stroke();
-
-
     };
 
     this.isInside = function (x, y) {
@@ -440,8 +388,6 @@ var TapKey = function (x, y) {
             this.output = this.outputA;
         if (this.input.V > this.output.V) {
             this.output.V = this.input.V;
-        } else {
-            this.input.V = this.output.V;
         }
         canvas.draw();
     };
@@ -458,12 +404,6 @@ var Cell = function (x, y) {
     this.A.V = "+ve";
     this.B.V = "-ve";
     this.draw = function () {
-        // canvas.context.beginPath();
-        // canvas.context.rect(this.x, this.y, this.width, this.height);
-        // canvas.context.lineWidth = "1";
-        // canvas.context.stroke();
-        // canvas.context.closePath();
-
         canvas.context.lineWidth = "4";
         canvas.context.strokeStyle = "black";
 
@@ -508,143 +448,84 @@ var Cell = function (x, y) {
     };
     this.isInside = function () {
 
-    }
+    };
 };
 
+var Resistor = function (x, y) {
+    this.width = 20;
+    this.height = 44;
+    this.x = x - (this.width - 20) / 2;
+    this.y = y - this.height / 2;
+    this.R = "";
 
-//pndiode.........
+    this.A = new point(canvas.id, null, this.x - 40, this.y + this.height / 2, 6, pointType.PASSIVE, "-ve");
+    this.B = new point(canvas.id, null, this.x + 90, this.y + this.height / 2, 6, pointType.PASSIVE, "+ve");
 
- var Resistor = function (x, y) {
-     //x=74;
-     //y=48;
-     this.width = 20;
-     this.height = 44;
-     this.x = x - (this.width - 20) / 2;
-     this.y = y - this.height / 2;
+    this.draw = function () {
+        canvas.context.beginPath();
+        canvas.context.rect(this.x, this.y, this.width - 20, this.height);
+        canvas.context.lineWidth = "5";
+        canvas.context.strokeStyle = "black";
+        canvas.context.stroke();
+        canvas.context.closePath();
 
+        canvas.context.beginPath();
+        canvas.context.moveTo(this.x + 50, this.y + this.height / 2);
+        canvas.context.lineTo(this.x + 86, this.y + this.height / 2);
+        canvas.context.lineWidth = 3;
+        canvas.context.stroke();
+        canvas.context.closePath();
 
-         this.R = "";
+        canvas.context.beginPath();
+        canvas.context.moveTo(this.x, this.y + this.height / 2);
+        canvas.context.lineTo(this.x - 36, this.y + this.height / 2);
+        canvas.context.lineWidth = "3";
+        canvas.context.stroke();
+        canvas.context.closePath();
 
-         this.A = new point(canvas.id, null, this.x - 40, this.y + this.height / 2, 6, pointType.PASSIVE, "-ve");
-         this.B = new point(canvas.id, null, this.x + 90, this.y + this.height / 2, 6, pointType.PASSIVE, "+ve");
-     // if(255<= x <= 475 && 414<= y <= 470) {
-         this.draw = function () {
-             canvas.context.beginPath();
-             canvas.context.rect(this.x, this.y, this.width - 20, this.height);
-             canvas.context.lineWidth = "5";
-             canvas.context.strokeStyle = "black";
-             canvas.context.stroke();
-             canvas.context.closePath();
+        canvas.context.beginPath();
+        canvas.context.moveTo(this.x, this.y + this.height / 2);
+        canvas.context.lineTo(this.x + 51, this.y - this.height / 32);
+        canvas.context.lineWidth = "4";
+        canvas.context.stroke();
+        canvas.context.closePath();
 
-             canvas.context.beginPath();
-             canvas.context.moveTo(this.x + 50, this.y + this.height / 2);
-             canvas.context.lineTo(this.x + 86, this.y + this.height / 2);
-             canvas.context.lineWidth = 3;
-             canvas.context.stroke();
-             canvas.context.closePath();
+        canvas.context.beginPath();
+        canvas.context.moveTo(this.x, this.y + this.height / 2);
+        canvas.context.lineTo(this.x + 51, this.y + this.height + 2);
+        canvas.context.lineWidth = "4";
+        canvas.context.stroke();
+        canvas.context.closePath();
 
-             canvas.context.beginPath();
-             canvas.context.moveTo(this.x, this.y + this.height / 2);
-             canvas.context.lineTo(this.x - 36, this.y + this.height / 2);
-             canvas.context.lineWidth = "3";
-             canvas.context.stroke();
-             canvas.context.closePath();
+        canvas.context.beginPath();
+        canvas.context.moveTo(this.x + 50, this.y - (this.height / 32));
+        canvas.context.lineTo(this.x + 50, this.y + this.height + 3);
+        canvas.context.lineWidth = "4";
+        canvas.context.stroke();
+        canvas.context.closePath();
 
-             canvas.context.beginPath();
-             canvas.context.moveTo(this.x, this.y + this.height / 2);
-             canvas.context.lineTo(this.x + 51, this.y - this.height / 32);
-             canvas.context.lineWidth = "4";
-             canvas.context.stroke();
-             canvas.context.closePath();
-
-             canvas.context.beginPath();
-             canvas.context.moveTo(this.x, this.y + this.height / 2);
-             canvas.context.lineTo(this.x + 51, this.y + this.height + 2);
-             canvas.context.lineWidth = "4";
-             canvas.context.stroke();
-             canvas.context.closePath();
-
-             canvas.context.beginPath();
-             canvas.context.moveTo(this.x + 50, this.y - (this.height / 32));
-             canvas.context.lineTo(this.x + 50, this.y + this.height + 3);
-             canvas.context.lineWidth = "4";
-             canvas.context.stroke();
-             canvas.context.closePath();
-
-
-             this.A.draw();
-             this.B.draw();
-
-         };
-     //}
-     // else{
-     //     alert("sdfgsgsg");
-     // }
-         //alert(x+ '+'  +y);
-         this.isInside = function () {
-             return false;
-         };
-
-     // else {
-     //     alert('Please place P-N Diode inside container');
-     // }
-
- };
-
-// LED CLASS
-// var LED = function (x, y) {
-//     this.width = 20;
-//     this.height = 40;
-//     this.x = x - this.width / 2;
-//     this.y = y - this.height / 2;
-    
-//     this.A = new point(canvas.id, null, this.x, this.y + this.height / 2, 5, pointType.PASSIVE, "+ve");
-//     this.B = new point(canvas.id, null, this.x + 20, this.y + this.height / 2, 5, pointType.PASSIVE, "-ve");
-
-//     this.draw = function () {
-//         // Draw LED body
-//         canvas.context.beginPath();
-//         canvas.context.arc(this.x + 10, this.y + 10, 10, 0, Math.PI * 2);
-//         canvas.context.fillStyle = "red";
-//         canvas.context.fill();
-//         canvas.context.strokeStyle = "black";
-//         canvas.context.stroke();
-//         canvas.context.closePath();
-
-//         // Draw LED leads
-//         canvas.context.beginPath();
-//         canvas.context.moveTo(this.x + 5, this.y + 20);
-//         canvas.context.lineTo(this.x + 5, this.y + 30);
-//         canvas.context.stroke();
-
-//         canvas.context.beginPath();
-//         canvas.context.moveTo(this.x + 15, this.y + 20);
-//         canvas.context.lineTo(this.x + 15, this.y + 30);
-//         canvas.context.stroke();
-
-//         this.A.draw();
-//         this.B.draw();
-//     };
-
-//     this.isInside = function (x, y) {
-//         return x > this.x && x < this.x + this.width && y > this.y && y < this.y + this.height;
-//     };
-// };
+        this.A.draw();
+        this.B.draw();
+    };
+    this.isInside = function () {
+        return false;
+    };
+};
 
 var LED = function (x, y, color) {
     this.width = 20;
     this.height = 40;
     this.x = x - this.width / 2;
     this.y = y - this.height / 2;
-    this.color = color.toLowerCase(); // Convert to lowercase for consistency
-    this.voltage = 0; // Initial voltage
+    this.color = color.toLowerCase();
+    this.voltage = 0;
     this.kneeVoltage = {
         "red": 1.78,
         "yellow": 1.86,
         "green": 2.36,
         "blue": 2.58
-    }[this.color]; // Get knee voltage based on color
-    this.glowing = false; // Initially OFF
+    };
+    this.glowing = false;
 
     this.A = new point(canvas.id, null, this.x, this.y + this.height / 2, 5, pointType.PASSIVE, "+ve");
     this.B = new point(canvas.id, null, this.x + 20, this.y + this.height / 2, 5, pointType.PASSIVE, "-ve");
@@ -653,12 +534,11 @@ var LED = function (x, y, color) {
         canvas.context.beginPath();
         canvas.context.arc(this.x + 10, this.y + 10, 10, 0, Math.PI * 2);
 
-        // If voltage is above knee voltage, LED glows
         if (this.voltage >= this.kneeVoltage) {
-            canvas.context.fillStyle = this.color; // Fill with respective color
+            canvas.context.fillStyle = this.color;
         } else {
-            canvas.context.fillStyle = "white"; // Default white fill
-            canvas.context.strokeStyle = this.color; // Outline color matches LED type
+            canvas.context.fillStyle = "white";
+            canvas.context.strokeStyle = this.color;
             canvas.context.lineWidth = 2;
         }
 
@@ -666,7 +546,6 @@ var LED = function (x, y, color) {
         canvas.context.stroke();
         canvas.context.closePath();
 
-        // Draw LED leads
         canvas.context.beginPath();
         canvas.context.moveTo(this.x + 5, this.y + 20);
         canvas.context.lineTo(this.x + 5, this.y + 30);
@@ -682,8 +561,8 @@ var LED = function (x, y, color) {
     };
 
     this.updateGlow = function () {
-        this.glowing = this.voltage >= this.kneeVoltage; // Check if LED should glow
-        canvas.draw(); // Redraw canvas
+        this.glowing = this.voltage >= this.kneeVoltage;
+        canvas.draw();
     };
 };
 
@@ -696,14 +575,14 @@ var Galvanometer = function (x, y) {
     this.value = "00";
     this.maxValue = 60;
     this.minValue = -60;
-    this.A = new point(canvas.id, null, this.x -30, this.y + this.height / 2, 6, pointType.PASSIVE, "+ve");
-    this.B = new point(canvas.id, null, this.x +22+ this.width - 3, this.y + this.height / 2, 6, pointType.PASSIVE, "-ve");
+    this.A = new point(canvas.id, null, this.x - 30, this.y + this.height / 2, 6, pointType.PASSIVE, "+ve");
+    this.B = new point(canvas.id, null, this.x + 22 + this.width - 3, this.y + this.height / 2, 6, pointType.PASSIVE, "-ve");
     this.A.V = "";
     this.B.V = "";
     this.draw = function () {
 
         canvas.context.beginPath();
-        canvas.context.rect(this.x , this.y, this.width - 15, this.height);
+        canvas.context.rect(this.x, this.y, this.width - 15, this.height);
         canvas.context.lineWidth = "3";
         canvas.context.strokeStyle = "black";
         canvas.context.stroke();
@@ -725,78 +604,60 @@ var Galvanometer = function (x, y) {
 
         canvas.context.font = "20px digitalFont";
         canvas.context.fillStyle = "red";
-        canvas.context.fillText("Ammeter" , this.x + this.width / 2 - 40, this.y + this.height / 2 + 6);
+        canvas.context.fillText("Ammeter", this.x + this.width / 2 - 40, this.y + this.height / 2 + 6);
 
         this.A.draw();
         this.B.draw();
-        //this.update();
     };
     this.isInside = function () {
 
     };
-    // this.update = function () {
-    //     let value = this.A.V - this.B.V;
-    //     this.value = value;
-    //     //canvas.draw();
-    // }
 };
 
 var Potentiometer = function (x, y) {
-
-
-    // this.update = function () {
-    //     let value = this.A.V - this.B.V;
-    //     this.value = value;
-    //     //canvas.draw();
-    // }
     this.width = 100;
     this.height = 30;
     this.x = x - this.width / 2;
     this.y = y - this.height / 2;
     this.A = new point(canvas.id, null, this.x + 40, this.y + 25, 1, pointType.PASSIVE, "");
-    this.O = new point(canvas.id, null, this.x-25 , this.y+15 , 6, pointType.ACTIVE_PASSIVE, "+ve");
-    this.B = new point(canvas.id, null, this.x+110 , this.y + 15, 6, pointType.PASSIVE, "-ve");
-    this.A.V="";
-    this.O.V="";
-    this.B.V="";
-
-
+    this.O = new point(canvas.id, null, this.x - 25, this.y + 15, 6, pointType.ACTIVE_PASSIVE, "+ve");
+    this.B = new point(canvas.id, null, this.x + 110, this.y + 15, 6, pointType.PASSIVE, "-ve");
+    this.A.V = "";
+    this.O.V = "";
+    this.B.V = "";
 
     this.draw = function () {
+        canvas.context.beginPath();
+        canvas.context.rect(this.x, this.y, this.width - 15, this.height);
+        canvas.context.lineWidth = "3";
+        canvas.context.strokeStyle = "black";
+        canvas.context.stroke();
+        canvas.context.closePath();
 
         canvas.context.beginPath();
-            canvas.context.rect(this.x , this.y, this.width - 15, this.height);
-            canvas.context.lineWidth = "3";
-            canvas.context.strokeStyle = "black";
-            canvas.context.stroke();
-            canvas.context.closePath();
+        canvas.context.moveTo(this.x - 20, this.y + 15);
+        canvas.context.lineTo(this.x, this.y + 15);
+        canvas.context.lineWidth = 2;
+        canvas.context.stroke();
+        canvas.context.closePath();
 
         canvas.context.beginPath();
-            canvas.context.moveTo(this.x -20, this.y+15);
-            canvas.context.lineTo(this.x , this.y+15);
-            canvas.context.lineWidth = 2;
-            canvas.context.stroke();
-            canvas.context.closePath();
-
-        canvas.context.beginPath();
-        canvas.context.moveTo(this.x + 84, this.y+15 );
+        canvas.context.moveTo(this.x + 84, this.y + 15);
         canvas.context.lineTo(this.x + 107, this.y + 15);
         canvas.context.lineWidth = 2;
         canvas.context.stroke();
         canvas.context.closePath();
 
         canvas.context.font = "18px digitalFont";
-            canvas.context.fillStyle = "red";
-            canvas.context.fillText("voltmeter" , this.x + this.width / 2 - 45, this.y + this.height / 2 + 6);
+        canvas.context.fillStyle = "red";
+        canvas.context.fillText("voltmeter", this.x + this.width / 2 - 45, this.y + this.height / 2 + 6);
 
-
-        //this.A.draw();
         this.O.draw();
         this.B.draw();
     };
     this.isInside = function () {
 
-    }
+    };
 };
 
 var Condenser = function (x, y) {
@@ -822,10 +683,10 @@ var Condenser = function (x, y) {
 
         this.A.draw();
         this.B.draw();
-    }
+    };
     this.isInside = function () {
 
-    }
+    };
     this.charge = function () {
         if (this.A.V > this.B.V) {
             let Vs = this.A.V - this.B.V;
@@ -833,32 +694,20 @@ var Condenser = function (x, y) {
         } else if (this.B.V > 0) {
 
         }
-    }
+    };
     this.discharge = function () {
 
-    }
+    };
 };
 
 var Canvas = function () {
     this.id = "myCanvas";
     this.obj = document.getElementById(this.id);
-    this.width = window.innerWidth
-        || document.documentElement.clientWidth
-        || document.body.clientWidth;
-    this.height = h = window.innerHeight
-        || document.documentElement.clientHeight
-        || document.body.clientHeight;
+    this.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    this.height = h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
     this.obj.setAttribute("width", "775");
     this.obj.setAttribute("height", "550");
     this.context = this.obj.getContext('2d');
-
-    // var background = new Image();
-    // background.src = "images/can3.jpg";
-    //
-    // background.onload = function(){
-    //     canvas.context.drawImage(background,0,0);
-    // }
-
 
     this.element = [];
     this.connection = [];
@@ -874,7 +723,6 @@ var Canvas = function () {
         for (var con in this.connection) {
             this.connection[con].draw();
         }
-        // UPDATED FOR LOOP
         for (var i = 0; i < this.element.length; i++) {
             if (this.element[i] instanceof LED) {
                 this.element[i].draw();
@@ -882,69 +730,45 @@ var Canvas = function () {
                 this.element[i].draw();
             }
         }
-    }
+    };
 
-    // this.twoWayKey = function () {
-    //     for (let i = 0; i < buttons.length; i++) {
-    //         if (operationType[buttons[i].getAttribute("vlab-action")] === operationType.DRAW_TWO_WAY_KEY) {
-    //             // buttons[i].classList.remove("disabled");
-    //             // buttons[i].removeAttribute("disabled");
-    //             continue;
-    //             //}
-    //             // buttons[i].classList.add("disabled");
-    //             // buttons[i].setAttribute("disabled", "true");
-    //         }
-    //         terminal.update("container");
-    //     }
-
-
-        this.reset = function () {
+    this.reset = function () {
         this.element = [];
-        //this.name=[];
         this.connection = [];
         this.draw();
         terminal.update("Reset Done..");
-    }
+    };
     this.undo = function () {
         if (canvas.element.length > 0) {
-                canvas.redoArray.push(canvas.element.pop());
-                canvas.draw();
-                terminal.update("Undo Done..");
-
+            canvas.redoArray.push(canvas.element.pop());
+            canvas.draw();
+            terminal.update("Undo Done..");
         }
-    }
+    };
     this.redo = function () {
         if (canvas.redoArray.length > 0) {
             canvas.element.push(canvas.redoArray.pop());
             canvas.draw();
             terminal.update("Redo Done..");
         }
-    }
+    };
     this.start = function () {
         for (let i = 0; i < buttons.length; i++) {
             if (operationType[buttons[i].getAttribute("vlab-action")] == operationType.STOP_SIMULATION) {
-                // buttons[i].classList.remove("disabled");
-                // buttons[i].removeAttribute("disabled");
                 continue;
             }
-            // buttons[i].classList.add("disabled");
-            // buttons[i].setAttribute("disabled", "true");
         }
-        terminal.update("Simulation Stopped")
-    }
+        terminal.update("Simulation Stopped");
+    };
 
     this.stop = function () {
         for (let i = 0; i < buttons.length; i++) {
             if (operationType[buttons[i].getAttribute("vlab-action")] == operationType.STOP_SIMULATION) {
-                // buttons[i].classList.add("disabled");
-                // buttons[i].setAttribute("disabled", "true");
                 continue;
             }
-            // buttons[i].classList.remove("disabled");
-            // buttons[i].removeAttribute("disabled");
         }
-        terminal.update("Simulation Started")
-    }
+        terminal.update("Simulation Started");
+    };
 };
 
 window.onload = function () {
@@ -969,7 +793,6 @@ window.onload = function () {
         }
     }, false);
 
-    //attach Listener
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener("click", function (e) {
             var vlab_action = e.target.getAttribute("vlab-action");
@@ -1026,7 +849,7 @@ window.onload = function () {
         }, false);
     }
 
-    window.onkeypress = function(e){
+    window.onkeypress = function (e) {
         switch (e.keyCode) {
             case 25:
                 canvas.redo();
@@ -1037,9 +860,7 @@ window.onload = function () {
             default:
                 break;
         }
-    }
-
-    // document.getElementsByClassName("loader")[0].style.display = "none";
+    };
 };
 
 function mouseLeftDown(x, y) {
@@ -1054,26 +875,19 @@ function mouseLeftDown(x, y) {
             var temp = new twoWayKey(x, y);
             canvas.element.push(temp);
             canvas.redoArray = [];
-            console.log("TWO WAY CLIked")
+            console.log("TWO WAY CLIked");
         } else if (canvas.action == operationType.DRAW_CELL) {
             var temp = new Cell(x, y);
             canvas.element.push(temp);
             canvas.redoArray = [];
-        } else if (canvas.action == operationType.DRAW_RESISTOR ) {
-            //alert(x + "+" +y);
-            console.log(x>255 && x<475);
-            if(x>255 && x<475 && y>414 && y<470) {
-
-                //alert(x+ "+" +y);
-                canvas.element.push(new Resistor(x,y));
+        } else if (canvas.action == operationType.DRAW_RESISTOR) {
+            console.log(x > 255 && x < 475);
+            if (x > 255 && x < 475 && y > 414 && y < 470) {
+                canvas.element.push(new Resistor(x, y));
                 canvas.redoArray = [];
-            }
-            else{
-                //canvas.element.push();
+            } else {
                 alert("Please insert inside the container fluid...");
             }
-
-
         } else if (canvas.action == operationType.DRAW_GALVANOMETER) {
             var temp = new Galvanometer(x, y);
             canvas.element.push(temp);
@@ -1084,25 +898,17 @@ function mouseLeftDown(x, y) {
         } else if (canvas.action == operationType.DRAW_TAPKEY) {
             canvas.element.push(new TapKey(x, y));
             canvas.redoArray = [];
-        }
-        else if (canvas.action == operationType.DRAW_CONDENSER) {
+        } else if (canvas.action == operationType.DRAW_CONDENSER) {
             canvas.element.push(new Condenser(x, y));
             canvas.redoArray = [];
-        }else if (canvas.action == operationType.DRAW_LED) {
-            let selectedColor = document.getElementById("select_volt").value.split(" ")[1].toLowerCase(); // Get selected color
+        } else if (canvas.action == operationType.DRAW_LED) {
+            let selectedColor = document.getElementById("select_volt").value.split(" ")[1].toLowerCase();
             var temp = new LED(x, y, selectedColor);
             canvas.element.push(temp);
             canvas.redoArray = [];
-        }        
-        
+        }
+
         if (canvas.action == operationType.START_SIMULATION) {
-            // if (canvas.currentElement instanceof twoWayKey) {
-            //     canvas.currentElement.click();
-            // }
-            // else if (canvas.currentElement instanceof TapKey) {
-            //     console.log("working")
-            //     // canvas.currentElement.click();
-            // }
         }
     }
     console.log(canvas.element);
@@ -1111,7 +917,7 @@ function mouseLeftDown(x, y) {
 }
 
 function mouseMove(x, y) {
-    hover(x, y)
+    hover(x, y);
 }
 
 function hover(x, y) {
@@ -1268,9 +1074,6 @@ function hover(x, y) {
                 canvas.currentElement = canvas.element[ele].outputA;
                 poinHoverCircle(canvas.currentElement.point.x, canvas.currentElement.point.y, 3);
                 break;
-            } else {
-                canvas.draw();
-                canvas.currentElement = null;
             }
             if (canvas.element[ele].isInside(x, y)) {
                 canvas.currentElement = canvas.element[ele];
@@ -1313,28 +1116,72 @@ function poinHoverCircle(x, y, r) {
 
 function updateLEDState() {
     let selectedColor = document.getElementById("select_volt").value.split(" ")[1].toLowerCase();
-    let selectedVoltage = parseFloat(document.getElementById("myRange").value); 
+    let selectedVoltage = parseFloat(document.getElementById("myRange").value);
 
     for (let i = 0; i < canvas.element.length; i++) {
         let component = canvas.element[i];
         if (component instanceof LED && component.color === selectedColor) {
-            component.voltage = selectedVoltage; // Update LED voltage
-            component.updateGlow(); // Update glow state
+            component.voltage = selectedVoltage;
+            component.updateGlow();
         }
     }
 }
 
-
-
 document.getElementById("myRange").addEventListener("input", function () {
-    let selectedVoltage = this.value; // Get the current voltage from the slider
-    document.getElementById("temp_slider").innerText = selectedVoltage + "V"; // Update UI
-    updateLEDState(); // Update LED glow state
+    let selectedVoltage = this.value;
+    document.getElementById("volt_slider").innerText = selectedVoltage + "V";
+    updateLEDState();
 });
 
 
 function cal_volt() {
-    document.getElementById("vlted").style.display = "block"; // Show selected voltage
-    document.getElementById("voltage").innerText = document.getElementById("select_volt").value; // Show color
-    updateLEDState(); // Update LED glow state
+    document.getElementById("vlted").style.display = "block";
+    document.getElementById("voltage").innerText = document.getElementById("select_volt").value;
+    updateLEDState();
+}
+
+// Instruction Panel Logic
+
+function showNextInstruction() {
+    const instructions = document.querySelectorAll("#procedure-instructions li");
+    if (currentInstructionIndex < instructions.length) {
+        instructions[currentInstructionIndex].classList.remove("hidden");
+        currentInstructionIndex++;
+    } else {
+        clearInterval(instructionInterval);
+    }
+}
+
+function startInstructionPanel() {
+    const instructions = document.querySelectorAll("#procedure-instructions li");
+    if (instructions.length === 0) return;
+    
+    // Show only the first instruction initially
+    instructions.forEach((instruction, index) => {
+        if (index === 0) {
+            instruction.classList.remove("hidden");
+        } else {
+            instruction.classList.add("hidden");
+        }
+    });
+    currentInstructionIndex = 1;
+
+    // Start showing the rest one by one every 30 seconds
+    clearInterval(instructionInterval);
+    instructionInterval = setInterval(showNextInstruction, 30000);
+}
+
+function resetInstructionPanel() {
+    clearInterval(instructionInterval);
+    currentInstructionIndex = 0;
+    const instructions = document.querySelectorAll("#procedure-instructions li");
+    if (instructions.length === 0) return;
+    
+    instructions.forEach((instruction, index) => {
+        if (index === 0) {
+            instruction.classList.remove("hidden");
+        } else {
+            instruction.classList.add("hidden");
+        }
+    });
 }
