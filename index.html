@@ -122,3 +122,469 @@
 <div style="text-align: center;display: none">X : <span id="mouseX"
 style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</span> Y: <span id="mouseY"
                                                                                                                                                      style="border: 1px solid black; padding: 5px 20px; [...]
+</div>
+<div class="container-fluid mt-4" style="height: 105vh;">
+    <h2 class="text-center  p-2 text-white" style="border-radius: 10px;background-color:#634380;color:white;margin: -20px 5px 0 5px ;font-weight: bold">Plancks constant SIMULATION</h2>
+    <div class="row ml-1 mt-2 mb-5"  style="justify-content: left;" >
+
+        <div class="col-xs-4 ml-3 mt"  >
+             <div class="row  mb-1 "  >
+                <a href="#" style="text-decoration: none;color: white" data-target="#login" data-toggle="modal">
+                <button id="btn_main" style="width: 223px;background-color: #ca2222;font-weight: bold;"   vlab-action="STOP_SIMULATION" class="btn btn-danger mr-1 " onclick="main()">
+                    ENABLE POWER</button></a>
+                <div class="modal " id="login" style="width: 500px;margin: 0 0 0 435px">
+                    <div class="modal-dialog modal-lg">
+                        <!-- <div class="modal-content">
+                            <div class="modal-header bg-primary text-white">
+                                <h6>Among the following graphs which graph is plotted for semiconductors in Plancks constant Experiment?</h6>
+                                <button class="close" data-dismiss="modal">
+                                    <i class="fa fa-window-close text-white">x</i>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                    <img src="image/graph.png" style="width: 440px;height: 300px">
+                                    <button class="btn btn-primary btn-sm  mt-3" onclick="cl2()">Image 2</button>
+                                    
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+
+                <button id="btn_main2" style="width: 223px;display: none;font-weight: bold;background-color: #4CAF50"   vlab-action="START_SIMULATION" class="btn btn-success" onclick="main2()">DISABLE[...]
+
+            </div>
+            <!-- <div class="row mb-1">
+                <button id="container" style="width: 223px;cursor: allowed" disabled vlab-action="DRAW_TWO_WAY_KEY" class="btn btn-warning" >Place Container</button>
+            </div> -->
+            <div class="row" >
+                <button id="led"  style="width: 110px;cursor: allowed" disabled vlab-action="DRAW_LED" class="btn btn-primary mr-1">Place LED</button>
+                <button id="battery" style="width: 110px;cursor: allowed" disabled  vlab-action="DRAW_CELL" class="btn btn-primary ">Battery</button>
+            </div>
+            <div class="row mt-1 mb-1">
+
+                <button id="ammeter" style="width: 110px;cursor: allowed" disabled  vlab-action="DRAW_GALVANOMETER" class="btn btn-primary mr-1">Ammeter</button>
+
+                <button id="voltmeter" style="width: 110px;cursor: allowed" disabled  vlab-action="DRAW_POTENTIOMETER" class="btn btn-primary">Voltmeter</button>
+
+            </div>
+            <div class="row mb-1">
+
+                <button id="point" style="width: 110px;cursor: allowed" disabled  vlab-action="DRAW_POINT" class="btn btn-primary mr-1"> Point</button>
+
+                <button id="wires" style="width: 110px;cursor: allowed" disabled  vlab-action="MAKE_CONNECTION" class="btn btn-primary" onclick="connect_wire()"> Connect</button>
+
+            </div>
+
+            <div class="row mb-1">
+
+                <button id="undo" style="width: 110px;cursor: allowed" disabled  vlab-action="UNDO" class="btn btn-primary mr-1">Undo</button>
+
+                <button id="redo" style="width: 110px;cursor: allowed" disabled  vlab-action="REDO" class="btn btn-primary">Redo</button>
+            </div>
+            <div class="row mb-1">
+
+                <button id="reset" style="width: 223px;cursor: allowed" disabled  vlab-action="RESET" class="btn btn-danger">Reset</button>
+
+            </div>
+            <div class="row mt-2 " style="height: max-content;">
+                <div class=" pl-0 pr-0 "
+                     style="border: 0px inset green;width: 224px; box-shadow: 0px 0px 20px #bbb; background-color: white;">
+                    <h6 class="text-center mb-0"
+                        style="background-color: black;border-radius: 6px;width: 224px; color: white; box-shadow: 0px 3px 20px #bbb">Message</h6>
+                    <div id="terminal" style="width: 224px">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="col-xs-6 ml-4" style="border: 5px solid grey;border-radius: 10px; inset green; box-shadow: 0px 0px 20px #bbb;">
+            <img id="scream" src="image/Aryan Raj Maurya.svg "  style="display: none" >
+            <img id="therma" src="image/handi.jpg" style="display: none">
+            <img id="img_therma" src="image/therma.svg" style="display: none">
+            <canvas id="myCanvas" style="background-image: url(image/back.svg); background-size: 100px 100px;" >
+
+            </canvas>
+        </div>
+
+        <div class="col-xs-2 ml-2" >
+            <div class="row " style="height: max-content;">
+                <div style="background-color: lightpink;margin: 0 10px 0 15px;border-radius: 10px">
+                    <table style="border: none;text-align: center;width: 200px;margin: 0 0 20px 0" >
+                        <tr >
+                            <td class="p-2" style="border: none">
+                                <select id="select_volt" class="p-1" style="border-radius: 5px;outline: none;width: 150px">
+                                    <option>Select LED Color </option>
+                                    <option>01 RED</option>
+                                    <option>02 BLUE</option>
+                                    <option>03 GREEN </option>
+                                    <option>04 YELLOW</option>
+                                </select>
+                            </td>
+                            <td class="p-2" style="border: none">
+                                <button class="btn btn-primary disabled" disabled id="calc_volt" onclick="cal_volt()">Click</button>
+                            </td>
+                        </tr>
+                        <tr id="vlted" style="display: none">
+                            <td class="" style="border: none" >
+                                <h6>Selected Color of LED is </h6>
+                            </td>
+                            <td class="" style="border: none" >
+                                <h6><span id="voltage" style="color: red;font-weight: bold"></span></h6>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row mt-2" style="height: max-content;">
+                <div style="background-color: lightpink;margin: 0 10px 0 15px;border-radius: 10px">
+                    <table style="border: none;text-align: center;width: 260px;margin: 0 0 20px 20px">
+                        <tr>
+                            <td style="border: none" class="pt-2 pr-2 pb-2">
+                                <h6>Slide to choose Voltage</h6>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: none">
+                                <span style="font-weight: bold">0</span>
+                                <input type="range" min="0" max="5" step="0.1" value="0" class="slider" id="myRange" >
+                                <span style="font-weight: bold">5</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: none" class="pt-2 pr-2">
+                                <h6>Selected Voltage is&nbsp;<span id="volt_slider" style="font-weight: bold;color: red"></span>&nbsp;V</h6>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+                <div class="row mt-2" style="height: max-content;">
+                    <div style="background-color: lightpink;margin: 0 10px 0 15px;border-radius: 10px">
+                        <table style="border: none;text-align: center;width: 260px;margin: 0 0 20px 20px">
+                            <tr>
+                                <td style="border: none" class="pt-2 pr-2 pb-2">
+                                    <h6>Get Current </h6>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none">
+                                    <button type="button" class="btn btn-primary disabled" disabled id="current" onclick="rev_cur()">Find Here</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none" class="pt-2 pr-2">
+<h6>Respective value is&nbsp;<span id="sat_cur" style="font-weight: bold;color: red"></span>&nbsp;mA</h6>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+    </div>
+</div>
+
+<div style="margin: 0 5px 0 5px;border-radius: 20px">
+    <h4 class="obs-heading">TABLE : OBSERVATIONS</h4>
+
+    <div class="obs-container">
+        <div class="obs-box obs-table">
+            <table style="width: 670px">
+                <thead>
+                <tr>
+                    <th>S.No.</th>
+                    <th style="padding: 5px">LED Color</th>
+                    <th style="padding: 5px">Threshold Voltage (V<sub>0</sub>)</th>
+                    <th style="padding: 5px">Wavelength (&lambda; in nm)</th>
+                    <th style="padding: 5px">Inverse Wavelength (1/&lambda; in m<sup>-1</sup>)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>01</th>
+                    <td>
+                        <select id="color1">
+                            <option value="">Select LED Color</option>
+                            <option>01 RED</option>
+                            <option>02 BLUE</option>
+                            <option>03 GREEN</option>
+                            <option>04 YELLOW</option>
+                        </select>
+                    </td>
+                    <td><input type="number" id="volt1"></td>
+                    <td><input type="number" id="wave1"></td>
+                    <td id="inv_wave1"></td>
+                </tr>
+                <tr>
+                    <th>02</th>
+                    <td>
+                        <select id="color2">
+                            <option value="">Select LED Color</option>
+                            <option>01 RED</option>
+                            <option>02 BLUE</option>
+                            <option>03 GREEN</option>
+                            <option>04 YELLOW</option>
+                        </select>
+                    </td>
+                    <td><input type="number" id="volt2"></td>
+                    <td><input type="number" id="wave2"></td>
+                    <td id="inv_wave2"></td>
+                </tr>
+                <tr>
+                    <th>03</th>
+                    <td>
+                        <select id="color3">
+                            <option value="">Select LED Color</option>
+                            <option>01 RED</option>
+                            <option>02 BLUE</option>
+                            <option>03 GREEN</option>
+                            <option>04 YELLOW</option>
+                        </select>
+                    </td>
+                    <td><input type="number" id="volt3"></td>
+                    <td><input type="number" id="wave3"></td>
+                    <td id="inv_wave3"></td>
+                </tr>
+                <tr>
+                    <th>04</th>
+                    <td>
+                        <select id="color4">
+                            <option value="">Select LED Color</option>
+                            <option>01 RED</option>
+                            <option>02 BLUE</option>
+                            <option>03 GREEN</option>
+                            <option>04 YELLOW</option>
+                        </select>
+                    </td>
+                    <td><input type="number" id="volt4"></td>
+                    <td><input type="number" id="wave4"></td>
+                    <td id="inv_wave4"></td>
+                </tr>
+                <tr>
+                    <th>05</th>
+                    <td>
+                        <select id="color5">
+                            <option value="">Select LED Color</option>
+                            <option>01 RED</option>
+                            <option>02 BLUE</option>
+                            <option>03 GREEN</option>
+                            <option>04 YELLOW</option>
+                        </select>
+                    </td>
+                    <td><input type="number" id="volt5"></td>
+                    <td><input type="number" id="wave5"></td>
+                    <td id="inv_wave5"></td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+        <div class="obs-box graph-box">
+            <div id="l1" style="width:615px;height:277px"></div>
+        </div>
+    </div>
+
+    <div class="obs-actions">
+        <div class="left">
+            <button class="btn btn-primary" style="width: 220px" onclick="calculate_table()">Calculate Data</button>
+        </div>
+        <div class="right">
+            <button class="btn btn-primary disabled" style="width: 220px" id="graph" onclick="draw_graph()" disabled>Draw Graph</button>
+        </div>
+    </div>
+
+    <br>
+
+</div>
+<br>
+
+<br>
+<br>
+<div>
+    <h6 class="text-center">NOTE : Enter value of X coordinate and Y coordinate seperated with comma( , )</h6>
+    <table style="border: none;text-align: center;width:100%;
+        background-color: lightpink;border-radius: 8px;">
+        <tr>
+
+            <td style="border: none" class="p-3">
+                <span>
+                    <input type="text" style="width:200px;" id="ip1" placeholder="Enter First Coordinate">
+                </span>
+                <span>
+                    &nbsp;&nbsp;<input type="text" style="width:200px;" id="ip2" placeholder="Enter Second Coordinate">
+                </span>
+                <span>&nbsp;&nbsp;
+                    <button class="btn btn-primary disabled" id="slope_button" style="cursor: allowed" disabled onclick="slopy()">Find Slope</button>
+                </span>&nbsp;&nbsp;&nbsp;
+                <span id="slp" style="display: none">
+                    Calculated Slope is&nbsp;<span id="ip3" style="font-weight: bold;color: red;padding: 5px;"></span>
+                </span>
+            </td>
+        </tr>
+    </table>
+</div>
+<br>
+    <div>
+        <h6 class="text-center">NOTE : Enter value of Slope calculated above in the below box </h6>
+        <table style="border: none;text-align: center;width:100%;
+        background-color: lightpink;border-radius: 8px;">
+            <tr>
+
+                <td style="border: none" class="pt-3 pb-3 pl-3">
+                    <span>Plancks constant (E<sub>g</sub>) =</span>&nbsp;
+                    <input type="text" style="width:100px;" id="slp_value" placeholder="Enter Slope">/(e/c) &nbsp;
+                    <button class="btn btn-primary disabled" id="eg_button" style="cursor: allowed"
+                            disabled onclick="cal_eg()">Calculate</button>
+                </td>
+                <td style="border: none;display: none" id="hide_eg" class="pt-3 pb-3 pr-3">
+                    <h6>Observed Plancks constant is&nbsp;<span id="eg_value" style="font-weight: bold;color: red;padding: 5px;"></span></h6>
+                </td>
+
+            </tr>
+
+        </table>
+    </div>
+<hr>
+    <p style="bottom:0;float:right;font-size:6px">&copy;Aryan Raj Maurya</p>
+<script>
+    function cal_volt() {
+        var e1 = document.getElementById("select_volt");
+        var user1 = e1.options[e1.selectedIndex].text;
+
+        if(user1=='Select Voltage'){
+            alert('Please select the given voltage value ');
+        }
+        else {
+            document.getElementById('voltage').innerHTML=user1;
+            vlted.style.display="";
+            document.getElementById('current').disabled=false;
+            document.getElementById('current').style.cursor="pointer";
+            document.getElementById('current').classList.remove("disabled");
+        }
+
+
+    }
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("volt_slider");
+    output.innerHTML = slider.value;
+
+    slider.oninput = function() {
+        output.innerHTML = this.value;
+    }
+
+    function rev_cur() {
+        var volt = Number(document.getElementById("myRange").value);
+        var e1 = document.getElementById("select_volt");
+        var user1 = e1.options[e1.selectedIndex].text.toLowerCase();
+        
+        var v0 = 0;
+        if (user1.includes("red")) v0 = 1.8;
+        else if (user1.includes("blue")) v0 = 2.8;
+        else if (user1.includes("green")) v0 = 2.2;
+        else if (user1.includes("yellow")) v0 = 1.9;
+
+        var i_sat = 0;
+        if (volt >= v0) {
+            i_sat = (volt - v0) * 10 + Math.random();
+        } else {
+            i_sat = Math.random() * 0.01;
+        }
+        document.getElementById('sat_cur').innerHTML = i_sat.toFixed(3);
+        
+        // Update Ammeter text in canvas if possible
+        for (var i = 0; i < canvas.element.length; i++) {
+            if (canvas.element[i] instanceof Galvanometer) {
+                canvas.element[i].value = i_sat.toFixed(3);
+            }
+        }
+        canvas.draw();
+    }
+
+    function calculate_table() {
+        for (var i = 1; i <= 5; i++) {
+            var wave = document.getElementById('wave' + i).value;
+            if (wave != '') {
+                var inv_wave = 1 / (Number(wave) * 1e-9);
+                document.getElementById('inv_wave' + i).innerHTML = inv_wave.toExponential(3);
+            }
+        }
+        document.getElementById('graph').disabled = false;
+        document.getElementById('graph').style.cursor = "pointer";
+        document.getElementById('graph').classList.remove("disabled");
+    }
+
+    //Graph code
+    function draw_graph() {
+        document.getElementById('slope_button').disabled = false;
+        document.getElementById('slope_button').style.cursor = "pointer";
+        document.getElementById('slope_button').classList.remove("disabled");
+
+        var pnt = [];
+        for (var i = 1; i <= 5; i++) {
+            var volt = document.getElementById('volt' + i).value;
+            var wave = document.getElementById('wave' + i).value;
+            if (volt != '' && wave != '') {
+                var inv_wave = 1 / (Number(wave) * 1e-9);
+                pnt.push({ x: inv_wave, y: Number(volt) });
+            }
+        }
+        
+        // Sorting points by x for linear fit
+        pnt.sort((a, b) => a.x - b.x);
+        
+        drawgraph("l1", pnt, "1/λ (m⁻¹)", "V₀ (V)");
+    }
+        
+    function slopy() {
+
+        var x = document.getElementById("ip1").value;
+        var i = x.indexOf(",");
+        var real1 = parseFloat(x.substring(x, i));
+        var img1 = parseFloat(x.substring(i + 1, x.length));
+
+        var y = document.getElementById("ip2").value;
+        var j = y.indexOf(",");
+        var real2 = parseFloat(y.substring(y, j));
+        var img2 = parseFloat(y.substring(j + 1, y.length));
+
+
+        if(x ==='' || y===''){
+
+            alert('Please insert data in all required fields... ');
+        }
+        else{
+            var real = real2 - real1;
+            var img = img2 - img1;
+            document.getElementById("ip3").innerHTML = (real / img).toFixed(3);
+
+            slp.style.display = "";
+
+            document.getElementById('eg_button').disabled=false;
+            document.getElementById('eg_button').style.cursor="pointer";
+            document.getElementById('eg_button').classList.remove("disabled");
+        }
+
+
+
+    }
+
+function cal_eg() {
+    var slope = Number(document.getElementById("slp_value").value);
+    if (isNaN(slope) || slope == 0) {
+        alert('Please enter a valid slope value to proceed...');
+    }
+    else {
+        var e = 1.602e-19;
+        var c = 3e8;
+        var h = (slope * e) / c;
+        document.getElementById("eg_value").innerHTML = h.toExponential(3) + " J·s";
+        document.getElementById('hide_eg').style.display = '';
+    }
+}
+
+</script>
+
+</body>
+</html>
