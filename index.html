@@ -124,51 +124,11 @@
             flex: 1 1 300px;
             text-align: center;
         }
-        /* Floating panel (small, non-invasive) */
-        .floating-panel {
-          position: fixed;
-          right: 28px;          /* adjust if you want it closer/farther from edge */
-          top: 200px;           /* adjust vertical position */
-          width: 180px;         /* smaller width as requested */
-          background: rgba(255,192,203,0.97);
-          border-radius: 8px;
-          padding: 8px;
-          box-shadow: 0 8px 24px rgba(0,0,0,0.10);
-          z-index: 9999;
-          font-size: 13px;
-        }
 
-/* Use small internal sections for visual grouping */
-.floating-panel .panel-section {
-  background: rgba(255,255,255,0.85);
-  border-radius: 6px;
-  padding: 6px;
-  margin-bottom: 8px;
-  text-align: center;
-}
-
-/* make inputs and selects fit nicely inside the smaller panel */
-.floating-panel select,
-.floating-panel input[type="range"],
-.floating-panel .btn {
-  width: calc(100% - 6px);
-  box-sizing: border-box;
-  font-size: 13px;
-}
-
-/* responsive fallback */
-@media (max-width: 992px) {
-  .floating-panel {
-    position: static;
-    width: 100%;
-    margin: 8px 0;
-  }
-}
-
-        /* @media (max-width: 992px) {
+        @media (max-width: 992px) {
             .obs-container {
                 flex-direction: column;
-            } */
+            }
 
             .graph-box {
                 width: 100%;
@@ -629,52 +589,6 @@ function cal_eg() {
     }
 }
 
-</script>
-    <script>
-(function () {
-  function createPlaceholder(el) {
-    var rect = el.getBoundingClientRect();
-    var ph = document.createElement('div');
-    ph.className = 'floating-placeholder';
-    ph.style.display = 'block';
-    // use measured height to preserve layout (fallback to 64px)
-    ph.style.height = (rect.height ? rect.height + 'px' : '64px');
-    ph.style.width = (rect.width ? rect.width + 'px' : '220px');
-    ph.style.minWidth = '40px';
-    return ph;
-  }
-
-  document.addEventListener('DOMContentLoaded', function () {
-    // create floating panel once
-    var panel = document.createElement('div');
-    panel.id = 'floating_panel';
-    panel.className = 'floating-panel';
-    document.body.appendChild(panel);
-
-    // find existing right-side small panels (safe and non-destructive)
-    // we look for elements that were originally used as small panels
-    var candidates = document.querySelectorAll('.small-panel');
-    if (!candidates || candidates.length === 0) {
-      // fallback: try to locate the column and small blocks by id
-      // but do nothing if nothing found
-      return;
-    }
-
-    // Move each small-panel into the floating panel, but preserve placeholders
-    candidates.forEach(function (orig) {
-      // insert placeholder to keep layout stable
-      var placeholder = createPlaceholder(orig);
-      orig.parentNode.insertBefore(placeholder, orig);
-
-      // wrap the moved node into a section for consistent styling
-      var section = document.createElement('div');
-      section.className = 'panel-section';
-      // move original node into this section (this preserves all events and IDs)
-      section.appendChild(orig);
-      panel.appendChild(section);
-    });
-  });
-})();
 </script>
 
 </body>
