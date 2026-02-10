@@ -83,45 +83,47 @@
         }
 
         .obs-table {
-            width: 670px;
+            width: 48%;
             max-width: 100%;
             overflow-x: auto;
             background: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .obs-table table {
+            width: 100% !important;
         }
 
         .obs-table table input[type="text"],
         .obs-table table input[type="number"],
         .obs-table table select {
             width: 100%;
-            padding: 6px 8px;
+            padding: 4px 4px;
             box-sizing: border-box;
+            font-size: 13px;
         }
 
         .graph-box {
-            width: 615px;
+            width: 48%;
             max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         #l1 {
             width: 100%;
-            height: 277px;
+            height: 250px;
             background: #fff;
             border: 1px solid #cfcfcf;
             border-radius: 4px;
             padding: 6px;
         }
 
-        .obs-actions {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
+        .btn-calc-container {
             margin-top: 10px;
-            flex-wrap: wrap;
-        }
-
-        .obs-actions .left,
-        .obs-actions .right {
-            flex: 1 1 300px;
             text-align: center;
         }
 
@@ -145,17 +147,12 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
 </div>
 <div class="container-fluid mt-4" style="height: 105vh;">
     <h2 class="text-center  p-2 text-white" style="border-radius: 10px;background-color:#634380;color:white;margin: -20px 5px 0 5px ;font-weight: bold">Plancks constant SIMULATION</h2>
-    <div class="row ml-1 mt-2 mb-5"  style="justify-content: left;" >
+    <div class="row ml-1 mt-2 mb-5"  style="justify-content: left; flex-wrap: nowrap;" >
 
-        <div class="col-xs-4 ml-3 mt"  >
+        <div class="col-xs-3 ml-3 mt"  >
              <div class="row  mb-1 "  >
-                <a href="#" style="text-decoration: none;color: white" data-target="#login" data-toggle="modal">
                 <button id="btn_main" style="width: 223px;background-color: #ca2222;font-weight: bold;"   vlab-action="STOP_SIMULATION" class="btn btn-danger mr-1 " onclick="main()">
-                    ENABLE POWER</button></a>
-                <div class="modal " id="login" style="width: 500px;margin: 0 0 0 435px">
-                    <div class="modal-dialog modal-lg">
-                    </div>
-                </div>
+                    ENABLE POWER</button>
 
                 <button id="btn_main2" style="width: 223px;display: none;font-weight: bold;background-color: #4CAF50"   vlab-action="START_SIMULATION" class="btn btn-success" onclick="main2()">DISABLE POWER</button>
 
@@ -202,7 +199,7 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
         </div>
 
 
-        <div class="col-xs-6 ml-4" style="border: 5px solid grey;border-radius: 10px; inset green; box-shadow: 0px 0px 20px #bbb;">
+        <div class="col-xs-6 ml-4" style="border: 5px solid grey;border-radius: 10px; box-shadow: 0px 0px 20px #bbb;">
             <img id="scream" src="image/Aryan Raj Maurya.svg "  style="display: none" >
             <img id="therma" src="image/handi.jpg" style="display: none">
             <img id="img_therma" src="image/therma.svg" style="display: none">
@@ -211,7 +208,7 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
             </canvas>
         </div>
 
-        <div class="col-xs-2 ml-2" >
+        <div class="col-xs-3 ml-2" >
             <div class="row " style="height: max-content;">
                 <div style="background-color: lightpink;margin: 0 10px 0 15px;border-radius: 10px">
                     <table style="border: none;text-align: center;width: 200px;margin: 0 0 20px 0" >
@@ -284,6 +281,19 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
                         </table>
                     </div>
                 </div>
+
+                <div class="row mt-2" style="height: max-content;">
+                    <div class="instruction-panel" style="margin: 0 10px 0 15px; border-radius: 10px; width: 260px;">
+                        <h6 class="text-center">Instructions</h6>
+                        <ol id="procedure-instructions">
+                            <li>1. Enable Power to start the experiment.</li>
+                            <li class="hidden">2. Circuit Setup: Connect a resistor in series with an LED and the power supply. Connect the voltmeter in parallel across the LED and the ammeter in series to measure current.</li>
+                            <li class="hidden">3. Measure Threshold Voltage: Slowly increase the voltage from the power supply until the LED just begins to glow (the threshold or knee voltage, V). Note this voltage and ensure the current is very small (near zero).</li>
+                            <li class="hidden">4. Repeat for Different Colors: Repeat step 2 for LEDs of different colors (red, green, blue, etc.) to get several (V, λ) pairs.</li>
+                            <li class="hidden">5. Data Collection: Record the threshold voltage (V) and the known peak wavelength (λ) for each LED.</li>
+                        </ol>
+                    </div>
+                </div>
     </div>
 </div>
 
@@ -291,15 +301,15 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
     <h4 class="obs-heading">TABLE : OBSERVATIONS</h4>
 
     <div class="obs-container">
-        <div class="obs-box obs-table">
-            <table style="width: 670px">
+        <div class="obs-table">
+            <table>
                 <thead>
                 <tr>
-                    <th>S.No.</th>
-                    <th style="padding: 5px">LED Color</th>
-                    <th style="padding: 5px">Threshold Voltage (V<sub>0</sub>)</th>
-                    <th style="padding: 5px">Wavelength (&lambda; in nm)</th>
-                    <th style="padding: 5px">Inverse Wavelength (1/&lambda; in m<sup>-1</sup>)</th>
+                    <th style="font-size: 13px">S.No.</th>
+                    <th style="padding: 2px; font-size: 13px">LED Color</th>
+                    <th style="padding: 2px; font-size: 13px">V<sub>0</sub> (V)</th>
+                    <th style="padding: 2px; font-size: 13px">&lambda; (nm)</th>
+                    <th style="padding: 2px; font-size: 13px">1/&lambda; (m<sup>-1</sup>)</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -307,98 +317,92 @@ style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</sp
                     <th>01</th>
                     <td>
                         <select id="color1">
-                            <option value="">Select LED Color</option>
+                            <option value="">Select</option>
                             <option>01 RED</option>
                             <option>02 BLUE</option>
                             <option>03 GREEN</option>
                             <option>04 YELLOW</option>
                         </select>
                     </td>
-                    <td><input type="number" id="volt1" style="width: 110px"></td>
-                    <td><input type="number" id="wave1" style="width: 110px"></td>
-                    <td id="inv_wave1"></td>
+                    <td><input type="number" id="volt1" style="width: 60px"></td>
+                    <td><input type="number" id="wave1" style="width: 60px"></td>
+                    <td id="inv_wave1" style="font-size: 12px"></td>
                 </tr>
                 <tr>
                     <th>02</th>
                     <td>
                         <select id="color2">
-                            <option value="">Select LED Color</option>
+                            <option value="">Select</option>
                             <option>01 RED</option>
                             <option>02 BLUE</option>
                             <option>03 GREEN</option>
                             <option>04 YELLOW</option>
                         </select>
                     </td>
-                    <td><input type="number" id="volt2" style="width: 110px"></td>
-                    <td><input type="number" id="wave2" style="width: 110px"></td>
-                    <td id="inv_wave2"></td>
+                    <td><input type="number" id="volt2" style="width: 60px"></td>
+                    <td><input type="number" id="wave2" style="width: 60px"></td>
+                    <td id="inv_wave2" style="font-size: 12px"></td>
                 </tr>
                 <tr>
                     <th>03</th>
                     <td>
                         <select id="color3">
-                            <option value="">Select LED Color</option>
+                            <option value="">Select</option>
                             <option>01 RED</option>
                             <option>02 BLUE</option>
                             <option>03 GREEN</option>
                             <option>04 YELLOW</option>
                         </select>
                     </td>
-                    <td><input type="number" id="volt3" style="width: 110px"></td>
-                    <td><input type="number" id="wave3" style="width: 110px"></td>
-                    <td id="inv_wave3"></td>
+                    <td><input type="number" id="volt3" style="width: 60px"></td>
+                    <td><input type="number" id="wave3" style="width: 60px"></td>
+                    <td id="inv_wave3" style="font-size: 12px"></td>
                 </tr>
                 <tr>
                     <th>04</th>
                     <td>
                         <select id="color4">
-                            <option value="">Select LED Color</option>
+                            <option value="">Select</option>
                             <option>01 RED</option>
                             <option>02 BLUE</option>
                             <option>03 GREEN</option>
                             <option>04 YELLOW</option>
                         </select>
                     </td>
-                    <td><input type="number" id="volt4" style="width: 110px"></td>
-                    <td><input type="number" id="wave4" style="width: 110px"></td>
-                    <td id="inv_wave4"></td>
+                    <td><input type="number" id="volt4" style="width: 60px"></td>
+                    <td><input type="number" id="wave4" style="width: 60px"></td>
+                    <td id="inv_wave4" style="font-size: 12px"></td>
                 </tr>
                 <tr>
                     <th>05</th>
                     <td>
                         <select id="color5">
-                            <option value="">Select LED Color</option>
+                            <option value="">Select</option>
                             <option>01 RED</option>
                             <option>02 BLUE</option>
                             <option>03 GREEN</option>
                             <option>04 YELLOW</option>
                         </select>
                     </td>
-                    <td><input type="number" id="volt5" style="width: 110px"></td>
-                    <td><input type="number" id="wave5" style="width: 110px"></td>
-                    <td id="inv_wave5"></td>
+                    <td><input type="number" id="volt5" style="width: 60px"></td>
+                    <td><input type="number" id="wave5" style="width: 60px"></td>
+                    <td id="inv_wave5" style="font-size: 12px"></td>
                 </tr>
                 </tbody>
 
             </table>
+            <div class="btn-calc-container">
+                <button class="btn btn-primary" style="width: 180px" onclick="calculate_table()">Calculate Data</button>
+            </div>
         </div>
 
-        <div class="obs-box graph-box">
+        <div class="graph-box">
             <div id="l1"></div>
+            <div class="btn-calc-container">
+                <button class="btn btn-primary disabled" style="width: 180px" id="graph" onclick="draw_graph()" disabled>Draw Graph</button>
+            </div>
         </div>
     </div>
-
-    <div class="obs-actions">
-        <div class="left">
-            <button class="btn btn-primary" style="width: 220px" onclick="calculate_table()">Calculate Data</button>
-        </div>
-        <div class="right">
-            <button class="btn btn-primary disabled" style="width: 220px" id="graph" onclick="draw_graph()" disabled>Draw Graph</button>
-        </div>
-    </div>
-
-    <br>
-
 </div>
 <br>
 
