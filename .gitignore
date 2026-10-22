@@ -1,0 +1,12 @@
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local scratch
+.vercel/
+node_modules/
