@@ -6,23 +6,17 @@ function main() {
     btn_main2.style.display = "";
     document.getElementById("calc_volt").disabled = false;
     document.getElementById("calc_volt").style.cursor = "pointer";
-    console.log("Main 1 display None");
-    console.log("All Buttons Enabled");
     cont();
     startInstructionPanel(); // Start the instruction panel
-    console.log("main() - startInstructionPanel called");
 }
 
 function main2() {
     btn_main2.style.display = 'none';
     btn_main.style.display = "";
-    console.log("Main 2 display None");
     resetInstructionPanel(); // Reset the instruction panel
-    console.log("main2() - resetInstructionPanel called");
 }
 
 function cont() {
-    console.log("cont function started");
     document.getElementById('led').disabled = false;
     document.getElementById('led').style.cursor = "pointer";
     document.getElementById('battery').disabled = false;
@@ -41,7 +35,6 @@ function cont() {
     document.getElementById('redo').style.cursor = "pointer";
     document.getElementById('reset').disabled = false;
     document.getElementById('reset').style.cursor = "pointer";
-    console.log("cont function Ended");
     document.body.focus();
 }
 
@@ -76,7 +69,6 @@ var getMousePos = function (canvas, e) {
     var boundingClientRect = canvas.getBoundingClientRect();
     var tx = e.clientX - boundingClientRect.left;
     var ty = e.clientY - boundingClientRect.top;
-    console.log(boundingClientRect.left);
     return {
         x: tx < 0 ? 0 : tx,
         y: ty < 0 ? 0 : ty
@@ -875,13 +867,11 @@ function mouseLeftDown(x, y) {
             var temp = new twoWayKey(x, y);
             canvas.element.push(temp);
             canvas.redoArray = [];
-            console.log("TWO WAY CLIked");
         } else if (canvas.action == operationType.DRAW_CELL) {
             var temp = new Cell(x, y);
             canvas.element.push(temp);
             canvas.redoArray = [];
         } else if (canvas.action == operationType.DRAW_RESISTOR) {
-            console.log(x > 255 && x < 475);
             if (x > 255 && x < 475 && y > 414 && y < 470) {
                 canvas.element.push(new Resistor(x, y));
                 canvas.redoArray = [];
@@ -911,7 +901,6 @@ function mouseLeftDown(x, y) {
         if (canvas.action == operationType.START_SIMULATION) {
         }
     }
-    console.log(canvas.element);
     canvas.draw();
     hover(x, y);
 }
